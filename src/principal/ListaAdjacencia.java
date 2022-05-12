@@ -1,4 +1,6 @@
 package principal;
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.*;
 
 public class ListaAdjacencia{
@@ -30,12 +32,13 @@ public class ListaAdjacencia{
             noatual.prox = novoNo;
             novoNo.anterior = noatual;
             noatual = novoNo;
+
         }
     }
 
     //mostra a lista de adjacencia
     public void listar(){
-
+        //fazer impressão
 
     }
 
