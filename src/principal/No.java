@@ -1,11 +1,12 @@
 package principal;
 
-public class No (){
+public class No {
 
-    No prox;
-    No anterior;
-    String valor;
-    String[] vizinho;
+    No prox; //próximo valor da lista
+    No anterior; //valor da lista anterior ao nó atual
+    String valor; //valor que guardaremos do nó
+    int Cor;  //cor do nó, sendo 0-branco, 1-cinza e 2-preto
+    No[] vizinho; //array com vizinhos
 
     public No(String[] valor, int n) {
         this.valor = valor[0];
@@ -21,7 +22,7 @@ public class No (){
     }
 
     public void setVizinho(String valor, int posicao) {
-        this.vizinho[posicao] = valor;
+        this.vizinho[posicao].valor = valor;
     }
 
     public String getVizinho(int i) {
