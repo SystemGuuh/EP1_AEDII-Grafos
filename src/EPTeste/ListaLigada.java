@@ -60,11 +60,11 @@ public class ListaLigada {
             if (posicao < 1) {
                 inserirInicio(novoNo.valor);
             } else {
-                ultimo.vizinhos[posicao] = novoNo;
+                ultimo.vizinhos.add(novoNo);
                 novoNo.ant = ultimo;
             }
         }else{
-            ultimo.vizinhos[posicao]=busca;
+            ultimo.vizinhos.add(busca);
         }
     }
 
@@ -84,16 +84,8 @@ public class ListaLigada {
     }
 
     //imprime a lista na tela
-    public void mostrarLista ( String valor){
-        if(primeiro!=null) {
-            No busca = buscaNo(valor);
-            if(busca!=null) {
-                System.out.print(busca.valor + " : ");
-                for (int k=0; k<busca.vizinhos.length;k++){
-                    System.out.print(busca.vizinhos[k].valor + " ; ");
-                }
-            }
-        }
+    public void mostrarLista (No raiz){
+        System.out.println("The new List is: " + raiz.vizinhos);
     }
 
 }

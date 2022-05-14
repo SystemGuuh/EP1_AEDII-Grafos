@@ -50,7 +50,7 @@ public class Main {
             lista.inserirInicio("h:");
             lista.inserirMeio("h;", 1);
 
-            lista.mostrarLista( "a" );
+            //lista.mostrarLista( "a" );
         }
 
          /*
