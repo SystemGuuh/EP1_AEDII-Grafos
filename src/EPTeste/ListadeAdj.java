@@ -2,29 +2,32 @@ package EPTeste;
 
 
 public class ListadeAdj {
-    int tamanho;
+    int tamanho, i=0;
     No lista[] = new No[tamanho];
-    public ListadeAdj(int tamanho) {
-        this.tamanho = tamanho;
+    public ListadeAdj(int tam) {
+        this.tamanho = tam;
     }
 
-    public void addNo(No no)
+    public void addNo(String valor)
     {
-        for(int i = 0; i < tamanho;i++)
-        {
+        No no = new No(valor);
+        //for(int i=0;i<tamanho;i++){
             if(lista.length == 0){
                 lista[i] = (No) clone(no);
-                break;
+                i++;
+                //break;
             }else {
                 No aux = acharNo(lista, no.valor);
                 if(aux == null){
+                    i++;
                     lista[i] = (No) clone(no);
-                    break;
+                   // break;
                 }else{
+                    i++;
                     lista[i] = (No) clone(aux);
-                    break;
+                   // break;
                 }
-            }
+            //}
         }
     }
     //Foi duro implementar isso aqui

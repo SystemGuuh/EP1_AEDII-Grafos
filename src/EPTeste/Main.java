@@ -1,55 +1,28 @@
 package EPTeste;
+
 import java.util.Scanner;
 
 public class Main {
-        public static void main (String args[]) {
+    public static void main(String args[]) {
 
-            //Instanciação de parametros, métodos, scannes
-            ListaLigada lista = new ListaLigada();
-            Scanner ler = new Scanner(System.in);
+        //Instanciação de parametros, métodos, scannes
+        ListaLigada lista = new ListaLigada();
+        Scanner ler = new Scanner(System.in);
 
-            //Variáveis
-            System.out.println("Digite a entrada:");
-            int repeticao = ler.nextInt(); //variável apra controle da entrada
 
-            for (int k = 0; k <= repeticao; k++) {
-                String entrada = ler.nextLine();
-                String[] vertices = " ".split(entrada); //cria array separando os espaços
-                //esse for tá dando erro, não sei porque
-                for (int i = 0; i <= vertices.length; i++) lista.inserirMeio(vertices[i], i);
-            }
+        //Variáveis
+        System.out.println("Digite a entrada:");
+        //int repeticao = ler.nextInt(); //variável apra controle da entrada
+        int repeticao = 8;
+        String[] teste = {"a: b;", "b: c; e; f;", "c: d; f;", "d: c; h;", "e: a; f;", "f: g;", "g: f; h;", "h: h;"};
 
-            //CASO DE TESTE:
-            lista.inserirInicio("a:");
-            lista.inserirMeio("b;", 0);
 
-            lista.inserirInicio("b:");
-            lista.inserirMeio("c;", 0);
-            lista.inserirMeio("e:", 1);
-            lista.inserirMeio("f;", 2);
+        ListadeAdj List = new ListadeAdj(repeticao);
 
-            lista.inserirInicio("c:");
-            lista.inserirMeio("d;", 0);
-            lista.inserirMeio("f:", 1);
-
-            lista.inserirInicio("d:");
-            lista.inserirMeio("c;", 0);
-            lista.inserirMeio("h:", 1);
-
-            lista.inserirInicio("e:");
-            lista.inserirMeio("a;", 0);
-            lista.inserirMeio("f:", 1);
-
-            lista.inserirInicio("f:");
-            lista.inserirMeio("g;", 0);
-
-            lista.inserirInicio("g:");
-            lista.inserirMeio("f;", 0);
-            lista.inserirMeio("h:", 1);
-
-            lista.inserirInicio("h:");
-            lista.inserirMeio("h;", 1);
-
+        for (int k = 0; k <= repeticao; k++) {
+            String[] vertices = " ".split(teste[k]); //cria array separando os espaços
+            List.addNo(vertices[0]);
+            for (int i = 1; i <= vertices.length; i++) List.lista[i - 1].addVizinho(vertices[i]);
         }
 
          /*
@@ -59,21 +32,22 @@ public class Main {
     4. A representação em texto do grafo de componentes fortemente conectados
   */
 
-    //Receber e montar gráfico
+        //Receber e montar gráfico
 
-    //Se o grafo é fortemente conexo
+        //Se o grafo é fortemente conexo
 
-    //O número de componentes fortemente conectados
+        //O número de componentes fortemente conectados
 
-    //Uma ordenação topológica do grafo de componentes fortemente conectados
+        //Uma ordenação topológica do grafo de componentes fortemente conectados
 
-    //A representação em texto do grafo de componentes fortemente conectados
+        //A representação em texto do grafo de componentes fortemente conectados
 
-    //Fazer Matriz Adjacência
+        //Fazer Matriz Adjacência
 
-    //Imprimir Matriz Adjacência
+        //Imprimir Matriz Adjacência
 
-    //Fazer Lista Adjacência
+        //Fazer Lista Adjacência
 
-    //Imprimir Lista Adjacência
+        //Imprimir Lista Adjacência
+    }
 }

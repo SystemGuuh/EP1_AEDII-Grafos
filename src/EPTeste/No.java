@@ -29,9 +29,10 @@ public class No implements Cloneable{
     }
 
     //Adicionando vizinhos a lista, ou seja, em teoria
-    public void addVizinho(No vizinho)
+    public void addVizinho(String valor)
     {
-        this.vizinhos.add(vizinho);
+        No vizinho = new No(valor);
+        this.vizinhos.add(vizinho); //clonar
     }
 
     public void imprimirLista(No no)
