@@ -1,7 +1,7 @@
 package EPTeste;
 
 public class ListaLigada {
-
+/*
     No primeiro, ultimo;
 
     //construtor da lista ligada
@@ -72,13 +72,17 @@ public class ListaLigada {
     public No buscaNo (String valor){
         No noTemp = primeiro;
         boolean found = false;
-        while ((!found)){
-            if (noTemp.valor.equals(valor)){
+        if (noTemp.valor.equals(valor)) {
+            found = true;
+            return noTemp;
+        }
+        for( int k=0;k<noTemp.vizinhos.size();k++)
+            if (noTemp.addVizinho(true).valor.equals(valor)){
                 found = true;
             } else {
                 /*EM CONSTRUÇÃO*/
-            }
-        }
+  /*          }
+
         if(found) return noTemp;
         else return null;
     }
@@ -88,4 +92,5 @@ public class ListaLigada {
         System.out.println("The new List is: " + raiz.vizinhos);
     }
 
+*/
 }
