@@ -12,12 +12,12 @@ public class Main {
             System.out.println("Digite a entrada:");
             int repeticao = ler.nextInt(); //variável apra controle da entrada
 
-            /*for (int k = 0; k <= repeticao; k++) {
+            for (int k = 0; k <= repeticao; k++) {
                 String entrada = ler.nextLine();
                 String[] vertices = " ".split(entrada); //cria array separando os espaços
                 //esse for tá dando erro, não sei porque
                 for (int i = 0; i <= vertices.length; i++) lista.inserirMeio(vertices[i], i);
-            }*/
+            }
 
             //CASO DE TESTE:
             lista.inserirInicio("a:");
@@ -50,7 +50,6 @@ public class Main {
             lista.inserirInicio("h:");
             lista.inserirMeio("h;", 1);
 
-            //lista.mostrarLista( "a" );
         }
 
          /*

@@ -1,17 +1,56 @@
 package EPTeste;
 
-import java.util.Collection;
-import java.util.LinkedList;
 
-public class ListadeAdj{
-    private Collection<? extends EPTeste.No> No;
-    Collection<No> grafo = new LinkedList<>(No);
+public class ListadeAdj {
+    int tamanho;
+    No lista[] = new No[tamanho];
+    public ListadeAdj(int tamanho) {
+        this.tamanho = tamanho;
+    }
 
-    public void leitura(int vertices)
+    public void addNo(No no)
     {
-        for(int i = 0; i < vertices;i++)
+        for(int i = 0; i < tamanho;i++)
         {
-            //separar as strings
+            if(lista.length == 0){
+                lista[i] = (No) clone(no);
+                break;
+            }else {
+                No aux = acharNo(lista, no.valor);
+                if(aux == null){
+                    lista[i] = (No) clone(no);
+                    break;
+                }else{
+                    lista[i] = (No) clone(aux);
+                    break;
+                }
+            }
         }
+    }
+    //Foi duro implementar isso aqui
+    private Object clone(No no) {
+        try{
+            return this.clone();
+        }    catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public No acharNo(No lista[], String valor) {
+        if (lista.length == 0) {
+            return null;
+        }else{
+            for(int i = 0; i < lista.length;i++)
+            {
+                for(No no: lista[i].vizinhos)
+                {
+                    if(no.valor == valor) {
+                        return no;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

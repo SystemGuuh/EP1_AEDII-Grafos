@@ -3,7 +3,7 @@ package EPTeste;
 import java.io.*;
 import java.util.*;
 
-public class No {
+public class No implements Cloneable{
     String valor;
     No prox;
     No ant;
@@ -18,6 +18,14 @@ public class No {
         prox = null;
         ant = null;
         cor=0;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     //Adicionando vizinhos a lista, ou seja, em teoria
