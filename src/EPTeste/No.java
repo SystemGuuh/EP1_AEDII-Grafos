@@ -10,7 +10,12 @@ public class No implements Cloneable{
     int cor;  //cor do nó, sendo 0-branco, 1-cinza e 2-preto
 
     private Collection<? extends EPTeste.No> No;
-    Collection<No> vizinhos = new LinkedList<>(No);
+    Collection<No> vizinhos;
+
+    {
+        assert No != null;
+        vizinhos = new LinkedList<>(No);
+    }
 
     //construtor do nó
     public No (String elem){
