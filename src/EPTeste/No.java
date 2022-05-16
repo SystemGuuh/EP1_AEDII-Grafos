@@ -9,8 +9,7 @@ public class No implements Cloneable{
     No ant;
     int cor;  //cor do nó, sendo 0-branco, 1-cinza e 2-preto
 
-    private Collection<? extends EPTeste.No> No;
-    Collection<No> vizinhos = new LinkedList<>(No);
+    ArrayList<No> vizinhos = new ArrayList<>();
 
     //construtor do nó
     public No (String elem){
@@ -41,5 +40,12 @@ public class No implements Cloneable{
         System.out.printf(" %s: "+no.vizinhos);
     }
 
-
+    public No getClone() {
+        try{
+            return (No) super.clone();
+        }    catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }
