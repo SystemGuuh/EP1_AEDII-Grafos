@@ -3,9 +3,9 @@ package Algoritmo;
 import java.util.ArrayList;
 
 public class Vertice<TIPO> {
-    private TIPO dado;
-    private ArrayList<Aresta<TIPO>> arestasEntrada;
-    private ArrayList<Aresta<TIPO>> arestasSaida;
+    public TIPO dado;
+    public ArrayList<Aresta<TIPO>> arestasEntrada;
+    public ArrayList<Aresta<TIPO>> arestasSaida;
     
     public Vertice(TIPO valor){
         this.dado = valor;
@@ -36,6 +36,5 @@ public class Vertice<TIPO> {
     public ArrayList<Aresta<TIPO>> getArestasSaida() {
         return arestasSaida;
     }
-    
-    
+
 }

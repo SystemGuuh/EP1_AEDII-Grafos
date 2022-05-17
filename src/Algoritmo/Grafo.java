@@ -1,10 +1,11 @@
 package Algoritmo;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Grafo<TIPO> {
-    private ArrayList<Vertice<TIPO>> vertices;
-    private ArrayList<Aresta<TIPO>> arestas;
+    public ArrayList<Vertice<TIPO>> vertices;
+    public ArrayList<Aresta<TIPO>> arestas;
     
     public Grafo(){
         this.vertices = new ArrayList<Vertice<TIPO>>();
@@ -25,6 +26,7 @@ public class Grafo<TIPO> {
         this.arestas.add(aresta);
     }
     
+
     public Vertice<TIPO> getVertice(TIPO dado){
         Vertice<TIPO> vertice = null;
         for(int i=0; i < this.vertices.size(); i++){
@@ -36,6 +38,7 @@ public class Grafo<TIPO> {
         return vertice;
     }
 
+    //busca e impressão em largura
     public void buscaEmLargura(){
         ArrayList<Vertice<TIPO>> marcados = new ArrayList<Vertice<TIPO>>();
         ArrayList<Vertice<TIPO>> fila = new ArrayList<Vertice<TIPO>>();
@@ -57,6 +60,7 @@ public class Grafo<TIPO> {
         }
     }
 
+    //Imprime o grafo da mesma forma que recebemos o valor
     public void imprimeBonito() {
         ArrayList<Vertice<TIPO>> marcados = new ArrayList<Vertice<TIPO>>();
         //ArrayList<Vertice<TIPO>> fila = new ArrayList<Vertice<TIPO>>();
@@ -79,5 +83,9 @@ public class Grafo<TIPO> {
         }
     }
 
-    
+    //preenche a pila para execução do algoritmo de kosaraju
+    void preencher(Grafo<TIPO> grafo, int i, Stack visitados){
+
+    }
+
 }

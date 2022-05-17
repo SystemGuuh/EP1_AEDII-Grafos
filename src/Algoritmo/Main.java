@@ -48,6 +48,11 @@ public class Main {
         //Função que imprime do mesmo jeito da entrada
         grafo.imprimeBonito();
 
+        System.out.println("");
+
+        kosaraju<String> a = new kosaraju<String>(grafo, rep);
+        a.printOT();
+
         //grafo.buscaEmLargura();
 
 
