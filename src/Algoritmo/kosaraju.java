@@ -1,113 +1,150 @@
 package Algoritmo;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class kosaraju<TIPO> {
 
-     int p;
+    int p; //quantidade de vertices
+    int cont=0; //quantidade de vertices fortemente conectados
+    int impressao; //impressão matricial ou igual como recebemos
+    String resposta = ""; //recebe a resposta dos vértices fortemente conectados
     Grafo<TIPO> grafo;
+    Grafo<TIPO> gf = new Grafo<TIPO>();
     boolean[] visitados;
     Stack pilha = new Stack(); // Classe Pilha
     int i=0;
+    Iterator<TIPO> it;
 
-    kosaraju(Grafo <TIPO>grafo, int rep){
+    kosaraju(Grafo <TIPO>grafo, int rep, int impressao){
         this.grafo = grafo;
         this.p=rep;
         visitados = new boolean[p];
+        this.impressao = impressao;
     }
 
-    Grafo<TIPO> getTransposto(){
-        Grafo<TIPO> g = new Grafo<TIPO>();
-        g.vertices = grafo.vertices;
+    //Imprime a repsosta identada
+    public void resposta(int cont){
+        String[] vertices = resposta.split(" ");
+        System.out.println("");
 
+        //Checa se o grafo é fortemente conexo, atravez da contagem de vértices fortemente conectados
+        if(cont == 1) System.out.println("Sim");
+        else System.out.println("Não");
 
-        for (int v = 0; v < grafo.vertices.size(); v++){
-
-            int i = grafo.vertices.get(v).getArestasSaida().size();
-            while(i!=0){
-                g.adicionarAresta(grafo.vertices.get(i).getDado(), grafo.vertices.get(v).getDado());
-                i--;
-        }
-
-
-        }
-        return g;
+        System.out.println(cont);
+        System.out.println(resposta);
     }
 
-
-    void preencher(int v, Stack pilha){
-        visitados[v] = true;
-        int i = grafo.vertices.get(v).getArestasSaida().size();
-        while (i!=0){
-            if(!visitados[i]) preencher(i, pilha);
-            i--;
+    //Cria uma cópia do grafo original
+    public void copiaGrafo(){
+        for(int i=0; i<p; i++){
+            gf.adicionarVertice(grafo.vertices.get(i).dado);
         }
-        pilha.push(grafo.vertices.get(v).getArestasSaida().get(i));
+
+        for (int i=0; i<p; i++){
+            gf.vertices.get(i).posicao = i;
+        }
+    }
+
+    //Gera o transposto no grafo que copiamos
+    Grafo<TIPO> getTransposto(Grafo<TIPO> gf) {
+        for (int v = 0; v < p; v++) {
+            int n = grafo.vertices.get(v).getArestasSaida().size();
+            while(n>0){
+                gf.adicionarAresta(grafo.vertices.get(v).arestasSaida.get(n-1).fim.dado, grafo.vertices.get(v).getDado());
+                n--;
+            }
+
+        }
+        return gf;
+    }
+
+    //Preenche a pilha com os valores do grafo original
+    void preencher(int i, Stack pilha){
+        visitados[i] = true;
+
+        //int i = grafo.vertices.get(k).getArestasSaida().size();
+        it = (Iterator<TIPO>) grafo.vertices.get(i).arestasSaida.iterator();
+        int n = grafo.vertices.get(i).getArestasSaida().size();
+        while(it.hasNext()){
+            it.next();
+            int posicao = grafo.vertices.get(i).arestasSaida.get(n-1).getFim().posicao;
+            if(!visitados[posicao]) preencher(posicao, pilha);
+            n--;
+        }
+        pilha.push(grafo.vertices.get(i).dado);
     }
 
     // Função recursiva para imprimir vértices fortemente conectados
     void DFS(int v, Stack stack)
     {
-        // Mark the current node as visited and print it
-        visitados[stack.size()] = true;
+        // Marco o nó como visitado
+        visitados[v] = true;
+        resposta = resposta + gf.vertices.get(v).getDado();
+        int m; //variável pra receber as posições das arestas de sáida
 
-        System.out.print(grafo.vertices.get(v).getDado() + ": ");
-
-        int n;
-
-        // Recur for all the vertices adjacent to this vertex
-        int i = grafo.vertices.get(v).getArestasSaida().size();
-        while (i>0 && (stack.size())>0){
-            n = stack.size()-1;
-            if (!visitados[n]) {
-                System.out.print(grafo.vertices.get(n).getDado() + "; ");
-                stack.pop();
+        // Recursão para os adjacentes
+        int n = gf.vertices.get(v).getArestasSaida().size();
+        while(n>0){
+            m = gf.vertices.get(v).arestasSaida.get(n-1).getFim().posicao;
+            if (!visitados[m]) {
+                DFS(m, stack);
             }
-            i--;
+            n--;
+
         }
     }
 
     //printa a ordenação topológica
     void printOT()
     {
-        Stack stack = new Stack();
-        int V =  p;
-        // Mark all the vertices as not visited (For first DFS)
+        Stack stack = new Stack(); //cria uma pilha vazia
+        int V =  p; //V = a quantidade de vértices
+
+        // Marca todos os vértices como não visitados para o preencher
         for (int i = 0; i < visitados.length; i++){
             visitados[i] = false;
         }
 
-        // Fill vertices in stack according to their finishing
-        // times
+        //dando posições para os vertice, assim nos localizamos em relação a pilha
+        for (int i=0; i<V; i++){
+            grafo.vertices.get(i).posicao = i;
+        }
+
+        // Coloca os vértices na pilha de acordo com o final
         for (int i = 0; i < V; i++)
             if (!visitados[i]) {
                 preencher(i, stack);
             }
-        // Create a reversed graph
 
-        Grafo gr = getTransposto();
+        // Grafo reverso
+        copiaGrafo();
+        gf = getTransposto(gf);
 
-        // Mark all the vertices as not visited (For second DFS)
+        // Volta a lista de visitados para falso, usaremos no segundo DFS
         for (int i = 0; i < V; i++) visitados[i] = false;
 
-
-        grafo.imprimeBonito();
-        // Now process all vertices in order defined by Stack
-        /*while (!stack.empty())
+        // Agora imprimimos na ordem da pilha
+        while (!stack.empty())
         {
+
             // Pop a vertex from stack
-           int v = (stack.size()-1);
+           int v = (p-stack.size());
            stack.pop();
 
             // Print Strongly connected component of the popped vertex
             if (!visitados[v])
             {
                 DFS(v, stack);
-                System.out.println("");
+
+                resposta = resposta + " ";
+                cont++;
             }
-        }*/
+        }
+
+        resposta(cont);
+        //gf.imprimeBonito();
     }
 }

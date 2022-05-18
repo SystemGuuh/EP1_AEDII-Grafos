@@ -16,9 +16,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int rep =8, cont=0;
+        int rep =8, cont=0, impressao=2;
         Grafo<String> grafo = new Grafo<String>();
-        String[] teste = {"a: b;", "b: c; e; f;", "c: d; f;", "d: c; h;", "e: a; f;", "f: g;", "g: f; h;", "h: h;"};
+        String[] teste = {"a: b;", "b: c; e; f;", "c: d; g;", "d: c; h;", "e: a; f;", "f: g;", "g: f; h;", "h: h;"};
         v = new String[rep];
 
         for (int k = 0; k < rep; k++) {
@@ -48,9 +48,7 @@ public class Main {
         //Função que imprime do mesmo jeito da entrada
         grafo.imprimeBonito();
 
-        System.out.println("");
-
-        kosaraju<String> a = new kosaraju<String>(grafo, rep);
+        kosaraju<String> a = new kosaraju<String>(grafo, rep, impressao);
         a.printOT();
 
         //grafo.buscaEmLargura();

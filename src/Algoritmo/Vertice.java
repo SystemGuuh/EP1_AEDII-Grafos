@@ -6,6 +6,7 @@ public class Vertice<TIPO> {
     public TIPO dado;
     public ArrayList<Aresta<TIPO>> arestasEntrada;
     public ArrayList<Aresta<TIPO>> arestasSaida;
+    public int posicao;
     
     public Vertice(TIPO valor){
         this.dado = valor;
