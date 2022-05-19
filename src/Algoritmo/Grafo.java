@@ -7,6 +7,7 @@ public class Grafo<TIPO> {
     public ArrayList<Vertice<TIPO>> vertices;
     public ArrayList<Aresta<TIPO>> arestas;
     
+    //Construtor da classe
     public Grafo(){
         this.vertices = new ArrayList<Vertice<TIPO>>();
         this.arestas = new ArrayList<Aresta<TIPO>>();

@@ -1,12 +1,11 @@
 package Algoritmo;
 
-import java.awt.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
     static String[] v;
+
     //função para saber se um nó já foi criado
     static boolean testaValor(String valor) {
         for (int i = 0; i < v.length; i++) {
@@ -16,10 +15,21 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int rep =8, cont=0, impressao=2;
+        Scanner ler = new Scanner(System.in);
+
+        /*Declaração de variáveis e recebimento de entrada*/
+        int rep, cont=0, impressao=2;
         Grafo<String> grafo = new Grafo<String>();
-        String[] teste = {"a: b;", "b: c; e; f;", "c: d; g;", "d: c; h;", "e: a; f;", "f: g;", "g: f; h;", "h: h;"};
+        String[] teste;
+
+
+        rep = ler.nextInt();
+        teste = new String[rep];
         v = new String[rep];
+        for(int i=0; i<rep; i++){
+            teste[i] = ler.nextLine();
+        }
+        //impressao = ler.nextInt();
 
         for (int k = 0; k < rep; k++) {
 
@@ -56,8 +66,4 @@ public class Main {
 
     }
 
-
 }
-
-
-

@@ -5,6 +5,7 @@ public class Matriz<TIPO> {
     Grafo<TIPO> grafo;
     int quantEntrada, tamanho;
 
+    //Construtor da classe
     Matriz(Grafo<TIPO> grafo, int q){
         this.grafo = grafo;
         this.quantEntrada = q;

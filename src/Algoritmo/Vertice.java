@@ -8,6 +8,7 @@ public class Vertice<TIPO> {
     public ArrayList<Aresta<TIPO>> arestasSaida;
     public int posicao;
     
+    //Construtor da classe
     public Vertice(TIPO valor){
         this.dado = valor;
         this.arestasEntrada = new ArrayList<Aresta<TIPO>>();

@@ -1,6 +1,5 @@
 package Algoritmo;
 
-import javax.sound.midi.Soundbank;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,19 +10,18 @@ public class kosaraju<TIPO> {
     int p; //quantidade de vertices
     int cont = 0; //quantidade de vertices fortemente conectados
     int impressao; //impressão matricial ou igual como recebemos
-    String resposta = ""; //recebe a resposta dos vértices fortemente conectados
+    boolean[] visitados; //array com vertices visitados
+
     Grafo<TIPO> grafo; //grafo atual
     Grafo<TIPO> gf = new Grafo<TIPO>(); //grafo auxiliar
     Grafo<String> gr = new Grafo<String>(); //Grafo para fortemente conectados
-    boolean[] visitados; //array com vertices visitados
+
+    String resposta = ""; //recebe a resposta dos vértices fortemente conectados
     Stack pilha = new Stack(); // Classe Pilha
     Iterator<TIPO> it; //Iterador para loops
 
 
-
-
-    /*CONSTRUTOR*/
-
+    //Construtor da classe
     kosaraju(Grafo<TIPO> grafo, int rep, int impressao) {
         this.grafo = grafo;
         this.p = rep;
@@ -32,6 +30,7 @@ public class kosaraju<TIPO> {
     }
 
     /*MÉTODOS*/
+
     //Monta o grafo fortemente conectado
 
     //cria as arestas dos grafo fortemente conectado **contém erros**
@@ -45,9 +44,7 @@ public class kosaraju<TIPO> {
                         if (!(gr.vertices.get(j).dado.contains((CharSequence) grafo.vertices.get(i).arestasSaida.get(z).fim.dado))) {
                             for (int s = 0; s < gr.vertices.size(); s++) {
                                 if (gr.vertices.get(s).dado.contains((CharSequence) grafo.vertices.get(i).arestasSaida.get(z).fim.dado)) {
-                                    if(!(gr.vertices.get(j).arestasSaida.contains(gr.vertices.get(s)))){
                                         gr.adicionarAresta(gr.vertices.get(j).dado, gr.vertices.get(s).dado);
-                                    }
                                     //gr.vertices.get(s).dado -> dado da saída
                                     //gr.vertices.get(j).dado -> dado do entrada
 
@@ -59,6 +56,7 @@ public class kosaraju<TIPO> {
 
             }
         }
+
         int g=0;
         //loop para tratamento de erro
         for (int j = 0; j < gr.vertices.size(); j++) {

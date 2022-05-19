@@ -6,6 +6,7 @@ public class Aresta<TIPO> {
     public Vertice<TIPO> inicio;
     public Vertice<TIPO> fim;
     
+    //Construtor da classe
     public Aresta(Vertice<TIPO> inicio, Vertice<TIPO> fim){
 
         this.inicio = inicio;
