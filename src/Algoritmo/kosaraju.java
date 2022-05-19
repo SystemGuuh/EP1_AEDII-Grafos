@@ -1,32 +1,85 @@
 package Algoritmo;
 
+import javax.sound.midi.Soundbank;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class kosaraju<TIPO> {
 
+    /*VARIÁVEIS USADAS:*/
     int p; //quantidade de vertices
-    int cont=0; //quantidade de vertices fortemente conectados
+    int cont = 0; //quantidade de vertices fortemente conectados
     int impressao; //impressão matricial ou igual como recebemos
     String resposta = ""; //recebe a resposta dos vértices fortemente conectados
-    Grafo<TIPO> grafo;
-    Grafo<TIPO> gf = new Grafo<TIPO>();
-    boolean[] visitados;
+    Grafo<TIPO> grafo; //grafo atual
+    Grafo<TIPO> gf = new Grafo<TIPO>(); //grafo auxiliar
+    Grafo<String> gr = new Grafo<String>(); //Grafo para fortemente conectados
+    boolean[] visitados; //array com vertices visitados
     Stack pilha = new Stack(); // Classe Pilha
-    int i=0;
-    Iterator<TIPO> it;
+    Iterator<TIPO> it; //Iterador para loops
 
-    kosaraju(Grafo <TIPO>grafo, int rep, int impressao){
+
+
+
+    /*CONSTRUTOR*/
+
+    kosaraju(Grafo<TIPO> grafo, int rep, int impressao) {
         this.grafo = grafo;
-        this.p=rep;
+        this.p = rep;
         visitados = new boolean[p];
         this.impressao = impressao;
     }
 
+    /*MÉTODOS*/
+    //Monta o grafo fortemente conectado
+
+    //cria as arestas dos grafo fortemente conectado **contém erros**
+    public void criaGrafoForte() {
+
+        //Criando conexões do grafo fortemente conectado
+        for (int i = 0; i < p; i++) { //para cada vértice do grafo principal
+            for (int j = 0; j < gr.vertices.size(); j++) { //pra cada vértice do grafo de componentes fortemente conectados
+                if (gr.vertices.get(j).dado.contains((CharSequence) grafo.vertices.get(i).dado)) {
+                    for (int z = 0; z < grafo.vertices.get(i).arestasSaida.size(); z++) {
+                        if (!(gr.vertices.get(j).dado.contains((CharSequence) grafo.vertices.get(i).arestasSaida.get(z).fim.dado))) {
+                            for (int s = 0; s < gr.vertices.size(); s++) {
+                                if (gr.vertices.get(s).dado.contains((CharSequence) grafo.vertices.get(i).arestasSaida.get(z).fim.dado)) {
+                                    if(!(gr.vertices.get(j).arestasSaida.contains(gr.vertices.get(s)))){
+                                        gr.adicionarAresta(gr.vertices.get(j).dado, gr.vertices.get(s).dado);
+                                    }
+                                    //gr.vertices.get(s).dado -> dado da saída
+                                    //gr.vertices.get(j).dado -> dado do entrada
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        int g=0;
+        //loop para tratamento de erro
+        for (int j = 0; j < gr.vertices.size(); j++) {
+            for (int i=0; i< gr.vertices.get(j).arestasSaida.size(); i++){
+                for (int k=0; k< gr.vertices.get(j).arestasSaida.size(); k++){
+                    if(gr.vertices.get(j).arestasSaida.get(i).fim.dado.equals(gr.vertices.get(j).arestasSaida.get(k).fim.dado) && i!=k){
+                     g++;
+                     if(g!=0){
+                        gr.vertices.get(j).arestasSaida.remove(k);
+                        g=0;
+                     }
+                    }
+                }
+            }
+
+        }
+
+    }
+
     //Imprime a repsosta identada
-    public void resposta(int cont){
-        String[] vertices = resposta.split(" ");
+    public void resposta(){
         System.out.println("");
 
         //Checa se o grafo é fortemente conexo, atravez da contagem de vértices fortemente conectados
@@ -35,6 +88,17 @@ public class kosaraju<TIPO> {
 
         System.out.println(cont);
         System.out.println(resposta);
+        System.out.println("");
+
+        criaGrafoForte();
+        if(impressao == 2){
+            gr.imprimeBonito();
+        } else if(impressao == 1){
+            Matriz<String> matrix = new Matriz<>(gr, p);
+            matrix.printaGrafo();
+        }else{
+            System.out.println("Opção inválida !!");
+        }
     }
 
     //Cria uma cópia do grafo original
@@ -82,7 +146,7 @@ public class kosaraju<TIPO> {
     {
         // Marco o nó como visitado
         visitados[v] = true;
-        resposta = resposta + gf.vertices.get(v).getDado();
+        resposta = resposta+gf.vertices.get(v).getDado();
         int m; //variável pra receber as posições das arestas de sáida
 
         // Recursão para os adjacentes
@@ -93,7 +157,6 @@ public class kosaraju<TIPO> {
                 DFS(m, stack);
             }
             n--;
-
         }
     }
 
@@ -104,7 +167,7 @@ public class kosaraju<TIPO> {
         int V =  p; //V = a quantidade de vértices
 
         // Marca todos os vértices como não visitados para o preencher
-        for (int i = 0; i < visitados.length; i++){
+        for (int i = 0; i < V; i++){
             visitados[i] = false;
         }
 
@@ -114,11 +177,11 @@ public class kosaraju<TIPO> {
         }
 
         // Coloca os vértices na pilha de acordo com o final
-        for (int i = 0; i < V; i++)
+        for (int i = 0; i < V; i++) {
             if (!visitados[i]) {
                 preencher(i, stack);
             }
-
+        }
         // Grafo reverso
         copiaGrafo();
         gf = getTransposto(gf);
@@ -140,11 +203,13 @@ public class kosaraju<TIPO> {
                 DFS(v, stack);
 
                 resposta = resposta + " ";
+                String[] vertice = resposta.split(" ");
+                gr.adicionarVertice(vertice[cont]);
                 cont++;
+
             }
         }
 
-        resposta(cont);
-        //gf.imprimeBonito();
+        resposta();
     }
 }
