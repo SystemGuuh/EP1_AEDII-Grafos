@@ -1,10 +1,9 @@
 package Algoritmo;
 
 import java.util.Stack;
-import java.util.ArrayList;
 import java.util.Iterator;
 
-public class kosaraju<TIPO> {
+public class kosaraju<T> {
 
     /*VARIÁVEIS USADAS:*/
     int p; //quantidade de vertices
@@ -12,17 +11,17 @@ public class kosaraju<TIPO> {
     int impressao; //impressão matricial ou igual como recebemos
     boolean[] visitados; //array com vertices visitados
 
-    Grafo<TIPO> grafo; //grafo atual
-    Grafo<TIPO> gf = new Grafo<TIPO>(); //grafo auxiliar
+    Grafo<T> grafo; //grafo atual
+    Grafo<T> gf = new Grafo<T>(); //grafo auxiliar
     Grafo<String> gr = new Grafo<String>(); //Grafo para fortemente conectados
 
     String resposta = ""; //recebe a resposta dos vértices fortemente conectados
     Stack pilha = new Stack(); // Classe Pilha
-    Iterator<TIPO> it; //Iterador para loops
+    Iterator<T> it; //Iterador para loops
 
 
     //Construtor da classe
-    kosaraju(Grafo<TIPO> grafo, int rep, int impressao) {
+    kosaraju(Grafo<T> grafo, int rep, int impressao) {
         this.grafo = grafo;
         this.p = rep;
         visitados = new boolean[p];
@@ -30,10 +29,9 @@ public class kosaraju<TIPO> {
     }
 
     /*MÉTODOS*/
-
     //Monta o grafo fortemente conectado
 
-    //cria as arestas dos grafo fortemente conectado **contém erros**
+    //cria as arestas dos grafo fortemente conectado **DIFICULDADE**
     public void criaGrafoForte() {
 
         //Criando conexões do grafo fortemente conectado
@@ -89,9 +87,9 @@ public class kosaraju<TIPO> {
         System.out.println("");
 
         criaGrafoForte();
-        if(impressao == 2){
+        if(impressao == 1){
             gr.imprimeBonito();
-        } else if(impressao == 1){
+        } else if(impressao == 2){
             Matriz<String> matrix = new Matriz<>(gr, p);
             matrix.printaGrafo();
         }else{
@@ -103,15 +101,13 @@ public class kosaraju<TIPO> {
     public void copiaGrafo(){
         for(int i=0; i<p; i++){
             gf.adicionarVertice(grafo.vertices.get(i).dado);
-        }
-
-        for (int i=0; i<p; i++){
             gf.vertices.get(i).posicao = i;
         }
+
     }
 
     //Gera o transposto no grafo que copiamos
-    Grafo<TIPO> getTransposto(Grafo<TIPO> gf) {
+    Grafo<T> getTransposto(Grafo<T> gf) {
         for (int v = 0; v < p; v++) {
             int n = grafo.vertices.get(v).getArestasSaida().size();
             while(n>0){
@@ -128,7 +124,7 @@ public class kosaraju<TIPO> {
         visitados[i] = true;
 
         //int i = grafo.vertices.get(k).getArestasSaida().size();
-        it = (Iterator<TIPO>) grafo.vertices.get(i).arestasSaida.iterator();
+        it = (Iterator<T>) grafo.vertices.get(i).arestasSaida.iterator();
         int n = grafo.vertices.get(i).getArestasSaida().size();
         while(it.hasNext()){
             it.next();
@@ -180,10 +176,10 @@ public class kosaraju<TIPO> {
                 preencher(i, stack);
             }
         }
+
         // Grafo reverso
         copiaGrafo();
         gf = getTransposto(gf);
-
         // Volta a lista de visitados para falso, usaremos no segundo DFS
         for (int i = 0; i < V; i++) visitados[i] = false;
 
@@ -191,11 +187,11 @@ public class kosaraju<TIPO> {
         while (!stack.empty())
         {
 
-            // Pop a vertex from stack
+            // Retira um valor da pilha
            int v = (p-stack.size());
            stack.pop();
 
-            // Print Strongly connected component of the popped vertex
+            // Printa o componente fortemente conectado
             if (!visitados[v])
             {
                 DFS(v, stack);

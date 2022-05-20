@@ -3,33 +3,33 @@ package Algoritmo;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Grafo<TIPO> {
-    public ArrayList<Vertice<TIPO>> vertices;
-    public ArrayList<Aresta<TIPO>> arestas;
+public class Grafo<T> {
+    public ArrayList<Vertice<T>> vertices;
+    public ArrayList<Aresta<T>> arestas;
     
     //Construtor da classe
     public Grafo(){
-        this.vertices = new ArrayList<Vertice<TIPO>>();
-        this.arestas = new ArrayList<Aresta<TIPO>>();
+        this.vertices = new ArrayList<Vertice<T>>();
+        this.arestas = new ArrayList<Aresta<T>>();
     }
     
-    public void adicionarVertice(TIPO dado){
-        Vertice<TIPO> novoVertice = new Vertice<TIPO>(dado);
+    public void adicionarVertice(T dado){
+        Vertice<T> novoVertice = new Vertice<T>(dado);
         this.vertices.add(novoVertice);
     }
     
-    public void adicionarAresta(TIPO dadoInicio, TIPO dadoFim){
-        Vertice<TIPO> inicio = this.getVertice(dadoInicio);
-        Vertice<TIPO> fim = this.getVertice(dadoFim);
-        Aresta<TIPO> aresta = new Aresta<TIPO>(inicio, fim);
+    public void adicionarAresta(T dadoInicio, T dadoFim){
+        Vertice<T> inicio = this.getVertice(dadoInicio);
+        Vertice<T> fim = this.getVertice(dadoFim);
+        Aresta<T> aresta = new Aresta<T>(inicio, fim);
         inicio.adicionarArestaSaida(aresta);
         fim.adicionarArestaEntrada(aresta);
         this.arestas.add(aresta);
     }
     
 
-    public Vertice<TIPO> getVertice(TIPO dado){
-        Vertice<TIPO> vertice = null;
+    public Vertice<T> getVertice(T dado){
+        Vertice<T> vertice = null;
         for(int i=0; i < this.vertices.size(); i++){
             if (this.vertices.get(i).getDado().equals(dado)){
                 vertice = this.vertices.get(i);
@@ -41,16 +41,16 @@ public class Grafo<TIPO> {
 
     //busca e impressão em largura
     public void buscaEmLargura(){
-        ArrayList<Vertice<TIPO>> marcados = new ArrayList<Vertice<TIPO>>();
-        ArrayList<Vertice<TIPO>> fila = new ArrayList<Vertice<TIPO>>();
-        Vertice<TIPO> atual = this.vertices.get(0);
-        marcados.add(atual);
+        ArrayList<Vertice<T>> marcados = new ArrayList<Vertice<T>>(); //vertices visitados
+        ArrayList<Vertice<T>> fila = new ArrayList<Vertice<T>>(); //vertices que precisam ser visitados
+        Vertice<T> atual = this.vertices.get(0);
+        marcados.add(atual);//elementos para visitar na busca em largura
         System.out.println(atual.getDado());
         fila.add(atual);
         while(fila.size() > 0){
-            Vertice<TIPO> visitado = fila.get(0);
+            Vertice<T> visitado = fila.get(0);
             for(int i=0; i < visitado.getArestasSaida().size(); i++){
-                Vertice<TIPO> proximo = visitado.getArestasSaida().get(i).getFim();
+                Vertice<T> proximo = visitado.getArestasSaida().get(i).getFim();
                 if (!marcados.contains(proximo)){ //se o vértice ainda não foi marcado
                     marcados.add(proximo);
                     System.out.println(proximo.getDado());
@@ -63,10 +63,10 @@ public class Grafo<TIPO> {
 
     //Imprime o grafo da mesma forma que recebemos o valor
     public void imprimeBonito() {
-        ArrayList<Vertice<TIPO>> marcados = new ArrayList<Vertice<TIPO>>();
-        //ArrayList<Vertice<TIPO>> fila = new ArrayList<Vertice<TIPO>>();
-        Vertice<TIPO> visitado;
-        Vertice<TIPO> atual;
+        ArrayList<Vertice<T>> marcados = new ArrayList<Vertice<T>>();
+
+        Vertice<T> visitado;
+        Vertice<T> atual;
 
         for (int k = 0; k <vertices.size(); k++) {
             atual = this.vertices.get(k);
@@ -75,7 +75,7 @@ public class Grafo<TIPO> {
                 System.out.print(atual.getDado() + ": ");
                 visitado = marcados.get(k);
                 for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
-                    Vertice<TIPO> proximo = visitado.getArestasSaida().get(i).getFim();
+                    Vertice<T> proximo = visitado.getArestasSaida().get(i).getFim();
                     System.out.print(proximo.getDado() + "; ");
                 }
                 System.out.println("");
@@ -84,9 +84,6 @@ public class Grafo<TIPO> {
         }
     }
 
-    //preenche a pila para execução do algoritmo de kosaraju
-    void preencher(Grafo<TIPO> grafo, int i, Stack visitados){
 
-    }
 
 }

@@ -2,40 +2,40 @@ package Algoritmo;
 
 import java.util.ArrayList;
 
-public class Vertice<TIPO> {
-    public TIPO dado;
-    public ArrayList<Aresta<TIPO>> arestasEntrada;
-    public ArrayList<Aresta<TIPO>> arestasSaida;
+public class Vertice<T> {
+    public T dado;
+    public ArrayList<Aresta<T>> arestasEntrada;
+    public ArrayList<Aresta<T>> arestasSaida;
     public int posicao;
     
     //Construtor da classe
-    public Vertice(TIPO valor){
+    public Vertice(T valor){
         this.dado = valor;
-        this.arestasEntrada = new ArrayList<Aresta<TIPO>>();
-        this.arestasSaida = new ArrayList<Aresta<TIPO>>();
+        this.arestasEntrada = new ArrayList<Aresta<T>>();
+        this.arestasSaida = new ArrayList<Aresta<T>>();
     }
 
-    public TIPO getDado() {
+    public T getDado() {
         return dado;
     }
 
-    public void setDado(TIPO dado) {
+    public void setDado(T dado) {
         this.dado = dado;
     }
     
-    public void adicionarArestaEntrada(Aresta<TIPO> aresta){
+    public void adicionarArestaEntrada(Aresta<T> aresta){
         this.arestasEntrada.add(aresta);
     }
     
-    public void adicionarArestaSaida(Aresta<TIPO> aresta){
+    public void adicionarArestaSaida(Aresta<T> aresta){
         this.arestasSaida.add(aresta);
     }
 
-    public ArrayList<Aresta<TIPO>> getArestasEntrada() {
+    public ArrayList<Aresta<T>> getArestasEntrada() {
         return arestasEntrada;
     }
 
-    public ArrayList<Aresta<TIPO>> getArestasSaida() {
+    public ArrayList<Aresta<T>> getArestasSaida() {
         return arestasSaida;
     }
 

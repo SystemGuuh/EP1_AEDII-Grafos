@@ -1,12 +1,12 @@
 package Algoritmo;
 
-public class Matriz<TIPO> {
+public class Matriz<T> {
     int[][] matriz;
-    Grafo<TIPO> grafo;
+    Grafo<T> grafo;
     int quantEntrada, tamanho;
 
     //Construtor da classe
-    Matriz(Grafo<TIPO> grafo, int q){
+    Matriz(Grafo<T> grafo, int q){
         this.grafo = grafo;
         this.quantEntrada = q;
         this.matriz = new int[grafo.vertices.size()][grafo.vertices.size()];
