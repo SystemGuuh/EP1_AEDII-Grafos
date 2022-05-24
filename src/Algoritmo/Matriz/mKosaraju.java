@@ -56,6 +56,7 @@ public class mKosaraju<T> {
             }
         }
 
+        /*ALMEIDA PAROU AQUI*/
         // Grafo reverso
         copiaGrafo();
         gf = getTransposto(gf);
