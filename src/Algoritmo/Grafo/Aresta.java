@@ -1,6 +1,6 @@
-package Algoritmo;
+package Algoritmo.Grafo;
 
-import java.util.ArrayList;
+import Algoritmo.Grafo.*;
 
 public class Aresta<T> {
     public Vertice<T> inicio;

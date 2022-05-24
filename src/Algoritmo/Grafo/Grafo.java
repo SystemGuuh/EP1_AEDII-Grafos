@@ -1,7 +1,7 @@
-package Algoritmo;
+package Algoritmo.Grafo;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import Algoritmo.Grafo.*;
 
 public class Grafo<T> {
     public ArrayList<Vertice<T>> vertices;

@@ -1,5 +1,6 @@
-package Algoritmo;
+package Algoritmo.Grafo;
 
+import Algoritmo.Grafo.*;
 import java.util.Stack;
 import java.util.Iterator;
 
@@ -8,7 +9,6 @@ public class kosaraju<T> {
     /*VARIÁVEIS USADAS:*/
     int p; //quantidade de vertices
     int cont = 0; //quantidade de vertices fortemente conectados
-    int impressao; //impressão matricial ou igual como recebemos
     boolean[] visitados; //array com vertices visitados
 
     Grafo<T> grafo; //grafo atual
@@ -16,16 +16,15 @@ public class kosaraju<T> {
     Grafo<String> gr = new Grafo<String>(); //Grafo para fortemente conectados
 
     String resposta = ""; //recebe a resposta dos vértices fortemente conectados
-    Stack pilha = new Stack(); // Classe Pilha
+    Stack pilha = new Stack(); // Pilha
     Iterator<T> it; //Iterador para loops
 
 
     //Construtor da classe
-    kosaraju(Grafo<T> grafo, int rep, int impressao) {
+    public kosaraju(Grafo<T> grafo, int rep) {
         this.grafo = grafo;
         this.p = rep;
         visitados = new boolean[p];
-        this.impressao = impressao;
     }
 
     /*MÉTODOS*/
@@ -87,14 +86,7 @@ public class kosaraju<T> {
         System.out.println("");
 
         criaGrafoForte();
-        if(impressao == 1){
-            gr.imprimeBonito();
-        } else if(impressao == 2){
-            Matriz<String> matrix = new Matriz<>(gr, p);
-            matrix.printaGrafo();
-        }else{
-            System.out.println("Opção inválida !!");
-        }
+        gr.imprimeBonito();;
     }
 
     //Cria uma cópia do grafo original
@@ -155,7 +147,7 @@ public class kosaraju<T> {
     }
 
     //printa a ordenação topológica
-    void printOT()
+    public void printOT()
     {
         Stack stack = new Stack(); //cria uma pilha vazia
         int V =  p; //V = a quantidade de vértices

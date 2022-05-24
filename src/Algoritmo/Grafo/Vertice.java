@@ -1,6 +1,7 @@
-package Algoritmo;
+package Algoritmo.Grafo;
 
 import java.util.ArrayList;
+import Algoritmo.Grafo.*;
 
 public class Vertice<T> {
     public T dado;
