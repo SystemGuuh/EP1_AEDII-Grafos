@@ -128,8 +128,7 @@ public class kosaraju<T> {
     }
 
     // Função recursiva para imprimir vértices fortemente conectados
-    void DFS(int v, Stack stack)
-    {
+    void DFS(int v, Stack stack){
         // Marco o nó como visitado
         visitados[v] = true;
         resposta = resposta+gf.vertices.get(v).getDado();
@@ -147,8 +146,7 @@ public class kosaraju<T> {
     }
 
     //printa a ordenação topológica
-    public void printOT()
-    {
+    public void printOT(){
         Stack stack = new Stack(); //cria uma pilha vazia
         int V =  p; //V = a quantidade de vértices
 

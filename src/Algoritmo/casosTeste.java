@@ -3,6 +3,7 @@ package Algoritmo;
 import Algoritmo.Grafo.Grafo;
 import Algoritmo.Grafo.kosaraju;
 import Algoritmo.Matriz.Matriz;
+import Algoritmo.Matriz.mKosaraju;
 
 public class casosTeste {
     int casoDeTeste, rep, impressao;
@@ -126,6 +127,9 @@ public class casosTeste {
                 matriz.adicionarConexao(vertices[0], vertices[i]);
             }
         }
-        matriz.imprimeMatriz();
+
+        //cria chama o kosaraju para encontrar os fortemente conectados e imprimir
+        mKosaraju<String> a = new mKosaraju<String>(matriz, this.rep);
+        a.printOT();
     }
 }
