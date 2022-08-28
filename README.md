@@ -1,7 +1,7 @@
 # EP1_AEDII
 Exercício de programação de Algoritmo e Estrutura de Dados II
 
-O trabalho consiste em desenvolver um programa em Java, C, C++ ou Python
+O trabalho consiste em desenvolver um programa em Java
 que recebe um grafo orientado e encontra as componentes fortemente
 conectadas . Na entrada o usuário deverá selecionar o tipo de representação a ser
 usada para representar os grafos durante a execução dos algoritmos, a qual pode
